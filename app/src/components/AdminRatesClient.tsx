@@ -115,7 +115,7 @@ export default function AdminRatesClient({ initialRates }: { initialRates: Excha
             </span>
             <span className="text-sm text-[#D4AF37] font-mono font-bold">
                 {invertedRate.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: invertedRate < 1 ? 6 : 2 })}
-                <span className="text-[10px] text-emerald-400 ml-1.5 font-normal">(+5% favor)</span>
+                <span className="text-[10px] text-emerald-400 ml-1.5 font-normal"></span>
             </span>
             </div>
 

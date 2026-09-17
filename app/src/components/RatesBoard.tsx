@@ -61,8 +61,8 @@ export default function RatesBoard({ rates }: { rates: ExchangeRate[] }) {
           </div>
         ) : (
           rates.map((rate, index) => {
-            // Calcular valor inverso si el usuario hizo clic en el botón
-            const displayRate = isInverted ? (1 / rate.rate) : rate.rate;
+            // Si está invertido, calculamos el inverso y le sumamos un 5% de margen comercial a favor
+            const displayRate = isInverted ? ((1 / rate.rate) * 1.05) : rate.rate;
             const displayPair = isInverted ? getInvertedPairText(rate.currency_pair) : rate.currency_pair;
 
             return (
@@ -81,7 +81,7 @@ export default function RatesBoard({ rates }: { rates: ExchangeRate[] }) {
                       {displayPair}
                     </span>
                     <span className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">
-                      {isInverted ? 'Tasa Inversa Calculada' : 'Mercado Oficial Astrea'}
+                      {isInverted ? 'Tasa Inversa (Margen +5% Favor)' : 'Mercado Oficial Astrea'}
                     </span>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function RatesBoard({ rates }: { rates: ExchangeRate[] }) {
                     })}
                   </p>
                   <p className="text-xs text-slate-400 font-mono mt-0.5">
-                    {isInverted ? 'Valor unitario' : 'Ref base'}
+                    {isInverted ? 'Ajustada comercial' : 'Ref base'}
                   </p>
                 </div>
               </div>

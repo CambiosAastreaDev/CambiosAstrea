@@ -79,7 +79,8 @@ export default function AdminRatesClient({ initialRates }: { initialRates: Excha
       <div className="flex flex-col mt-2 divide-y divide-[#1E2D52]/40">
         {rates.map((rate) => {
           const invertedPair = getInvertedPairText(rate.currency_pair)
-          const invertedRate = rate.rate > 0 ? (1 / rate.rate) : 0
+          // En AdminRatesClient.tsx
+            const invertedRate = rate.rate > 0 ? ((1 / rate.rate) * 1.05) : 0;
 
           return (
             <div key={rate.id} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center py-4 hover:bg-[#0B132B]/30 px-3 rounded-xl transition-colors">
@@ -107,15 +108,16 @@ export default function AdminRatesClient({ initialRates }: { initialRates: Excha
                 )}
               </div>
 
-              {/* Tasa Inversa Automática */}
-              <div className="flex flex-col">
-                <span className="text-xs text-slate-300 font-semibold flex items-center gap-1">
-                  <ArrowLeftRight className="w-3 h-3 text-emerald-400" /> {invertedPair}
-                </span>
-                <span className="text-sm text-slate-400 font-mono">
-                  {invertedRate.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: invertedRate < 1 ? 6 : 2 })}
-                </span>
-              </div>
+              {/* Tasa Inversa Automática con Margen */}
+            <div className="flex flex-col">
+            <span className="text-xs text-slate-300 font-semibold flex items-center gap-1">
+                <ArrowLeftRight className="w-3 h-3 text-emerald-400" /> {invertedPair}
+            </span>
+            <span className="text-sm text-[#D4AF37] font-mono font-bold">
+                {invertedRate.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: invertedRate < 1 ? 6 : 2 })}
+                <span className="text-[10px] text-emerald-400 ml-1.5 font-normal">(+5% favor)</span>
+            </span>
+            </div>
 
               {/* Botones de Acción */}
               <div className="text-right">
